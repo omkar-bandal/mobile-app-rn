@@ -1,17 +1,19 @@
-import { useNavigation } from '@react-navigation/native';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { HomeScreenNavigationProp } from '../navigations/stack.navigation';
+import { useAppNavigation } from '../hooks';
 
 export const HomeScreen = () => {
-  const navigate = useNavigation<HomeScreenNavigationProp>();
+  const navigate = useAppNavigation();
   return (
-    <SafeAreaView>
-      <View style={styles.homecontainer}>
-        <Text>Home Screen</Text>
-        <Pressable onPress={() => navigate.navigate('Details')}><Text>Go to Detais</Text></Pressable>
-      </View>
-    </SafeAreaView>
+    <View style={styles.homecontainer}>
+      <Text style={styles.pageTitle}>Home Screen</Text>
+      <Pressable
+        hitSlop={20}
+        pressRetentionOffset={20}
+        style={({ pressed }) => (pressed ? styles.highlight : styles.pressable)}
+        onPress={() => navigate.navigate('Details')}>
+        <Text style={styles.navBtnText}>Go to Details</Text>
+      </Pressable>
+    </View>
   );
 };
 const styles = StyleSheet.create({
@@ -20,5 +22,33 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#CCC',
+  },
+  pageTitle: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  pressable: {
+    width: 150,
+    height: 50,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#26A69A',
+    borderRadius: 5,
+  },
+  highlight: {
+    width: 130,
+    height: 40,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#80CBC4',
+    borderWidth: StyleSheet.hairlineWidth,
+  },
+  navBtnText: {
+    fontSize: 18,
+    fontWeight: '700',
+    color: '#FFF',
   },
 });

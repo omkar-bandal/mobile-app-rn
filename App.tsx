@@ -1,20 +1,12 @@
-import { RootStack } from './src/navigations/stack.navigation';
 // import { StyleSheet} from 'react-native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { AppNavigation } from './src/navigations';
+import { Provider } from 'react-redux';
+import { store } from './src/store/store';
 
 export default function App() {
   return (
-    <SafeAreaProvider>
-      <RootStack />
-    </SafeAreaProvider>
+    <Provider store={store}>
+      <AppNavigation />
+    </Provider>
   );
 }
-// const styles = StyleSheet.create({
-//   homecontainer: {
-//   // height: '100vh',
-//   // flex: 1,
-//   // alignItems: 'center',
-//   // justifyContent: 'center',
-//   // backgroundColor: '#0f0f0f',
-//   },
-// });
